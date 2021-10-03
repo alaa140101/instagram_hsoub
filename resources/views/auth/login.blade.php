@@ -15,6 +15,10 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
+            <div class="flex justify-center">
+                <h1 style="font-family:  Norican" class="text-2xl md:text-5xl">Instagram Hsoub</h1>
+            </div>
+
             <div>
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
