@@ -1,21 +1,16 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+        <div class="flex justify-between h-16 items-center">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
-                    </a>
-                </div>
+            <div class="flex-shrink-0 flex items-center">
+                <a href="#">
+                    <div><h1 style="font-family: Norican" class="text-3xl">{{__('Instagram Hsoub')}}</h1></div>
+                </a>
+            </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
-                </div>
+            <div>
+                <input type="text" placeholder="Search" class="border border-gray-300 border-solid text-center">
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -70,12 +65,15 @@
                 @endif
 
                 <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
+                <div class="sm:flex sm:items-center sm:ms-6">
+                    <a href="#" class="text-2xl mx-2 text-gray-700"><i class="fas fa-home"></i></a>
+                    <a href="#" class="text-2xl mx-2 text-gray-700"><i class="fas fa-compass"></i></a>
+                    <a href="#" class="text-2xl mx-2 text-gray-700"><i class="fas fa-inbox"></i></a>
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    <img class="h-6 w-6 rounded-full object-cover mx-2" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,13 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('user_profile', ['username' => auth()->user()->username]);
 })->name('dashboard');
+
+Route::get('{username}', function($username) {
+    $user = User::where('username', $username)->first();
+    if ($user == null ) {
+        abort(404);
+    }
+    return view('profile', ['profile' => $user]);
+})->name('user_profile');
