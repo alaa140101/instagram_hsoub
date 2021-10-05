@@ -17,29 +17,145 @@
                                 </x-jet-button>
                             </a>
                         </div>
+                        <div>
+                            <ul class="flex flex-row mb-5">
+                                <li class="mr-10 cursor-pointer"><span class="font-semibold">15</span>{{__('posts')}}</li>
+                                <li class="mr-10"><a href="#"><span class="font-semibold">50</span>{{__('followers')}}</a></li>
+                                <li class="mr-10"><a href="#"><span class="font-semibold">30</span>{{__('following')}}</a></li>
+                            </ul>
+                            <p class="mb-1 font-black">{{ $profile->name }}</p>
+                            <p> {{ $profile->bio}} </p>
+                            <p class="text-blue-500"><a href="{{ $profile->url }}">{{$profile->url}} </a></p>
+                        </div>
                     </div>
-                    <ul class="flex flex-row mb-5">
-                        <li class="mr-10 cursor-pointer"><span class="font-semibold">15</span>{{__('posts')}}</li>
-                        <li class="mr-10"><a href="#"><span class="font-semibold">50</span>{{__('followers')}}</a></li>
-                        <li class="mr-10"><a href="#"><span class="font-semibold">30</span>{{__('following')}}</a></li>
-                    </ul>
-                    <p class="mb-1 font-black">{{ $profile->name }}</p>
-                    <p> {{ $profile->bio}} </p>
-                    <p class="text-blue-500"><a href="{{ $profile->url }}">{{$profile->url}} </a></p>
+                </div>
                 </div>
             </div>
-
-        </header>
-        {{-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2> --}}
+        </header>        
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
-            </div>
-        </div>
+    <div class="max-w-4xl my-0 mx-auto">
+        <hr class="mb-10">
+           <div class="grid grid-cols-3 gap-4 mx-0 mt-0 mb-6">
+               <div class="post">
+                   <a href="#" class="w-full h-full">
+                       <img src="{{ asset('logo.jpg') }}" alt="" class="w-full h-full object-cover">
+                       <div class="post-info">
+                           <ul>
+                               <li class="inline-block font-semibold mr-7">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                   <i class="fas fa-heart" aria-hidden="true"></i>33
+                               </li>
+                               <li class="inline-block font-semibold">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                   <i class="fas fa-comment" aria-hidden="true"></i>12
+                               </li>
+                           </ul>
+                       </div>
+                   </a>
+               </div>
+               <div class="post">
+                   <a href="#" class="w-full h-full">
+                       <img src="{{ asset('logo.jpg') }}" alt="" class="w-full h-full object-cover">
+                       <div class="post-info">
+                           <ul>
+                               <li class="inline-block font-semibold mr-7">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                   <i class="fas fa-heart" aria-hidden="true"></i>33
+                               </li>
+                               <li class="inline-block font-semibold">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                   <i class="fas fa-comment" aria-hidden="true"></i>12
+                               </li>
+                           </ul>
+                       </div>
+                   </a>
+               </div>
+               <div class="post">
+                   <a href="#" class="w-full h-full">
+                       <img src="{{ asset('logo.jpg') }}" alt="" class="w-full h-full object-cover">
+                       <div class="post-info">
+                           <ul>
+                               <li class="inline-block font-semibold mr-7">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                   <i class="fas fa-heart" aria-hidden="true"></i>33
+                               </li>
+                               <li class="inline-block font-semibold">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                   <i class="fas fa-comment" aria-hidden="true"></i>12
+                               </li>
+                           </ul>
+                       </div>
+                   </a>
+               </div>
+               <div class="post">
+                   <a href="#" class="w-full h-full">
+                       <img src="{{ asset('logo.jpg') }}" alt="" class="w-full h-full object-cover">
+                       <div class="post-info">
+                           <ul>
+                               <li class="inline-block font-semibold mr-7">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                   <i class="fas fa-heart" aria-hidden="true"></i>33
+                               </li>
+                               <li class="inline-block font-semibold">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                   <i class="fas fa-comment" aria-hidden="true"></i>12
+                               </li>
+                           </ul>
+                       </div>
+                   </a>
+               </div>
+               <div class="post">
+                   <a href="#" class="w-full h-full">
+                       <img src="{{ asset('logo.jpg') }}" alt="" class="w-full h-full object-cover">
+                       <div class="post-info">
+                           <ul>
+                               <li class="inline-block font-semibold mr-7">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                   <i class="fas fa-heart" aria-hidden="true"></i>33
+                               </li>
+                               <li class="inline-block font-semibold">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                   <i class="fas fa-comment" aria-hidden="true"></i>12
+                               </li>
+                           </ul>
+                       </div>
+                   </a>
+               </div>
+               <div class="post">
+                   <a href="#" class="w-full h-full">
+                       <img src="{{ asset('logo.jpg') }}" alt="" class="w-full h-full object-cover">
+                       <div class="post-info">
+                           <ul>
+                               <li class="inline-block font-semibold mr-7">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                   <i class="fas fa-heart" aria-hidden="true"></i>33
+                               </li>
+                               <li class="inline-block font-semibold">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                   <i class="fas fa-comment" aria-hidden="true"></i>12
+                               </li>
+                           </ul>
+                       </div>
+                   </a>
+               </div>
+               <div class="post">
+                   <a href="#" class="w-full h-full">
+                       <img src="{{ asset('logo.jpg') }}" alt="" class="w-full h-full object-cover">
+                       <div class="post-info">
+                           <ul>
+                               <li class="inline-block font-semibold mr-7">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                   <i class="fas fa-heart" aria-hidden="true"></i>33
+                               </li>
+                               <li class="inline-block font-semibold">
+                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                   <i class="fas fa-comment" aria-hidden="true"></i>12
+                               </li>
+                           </ul>
+                       </div>
+                   </a>
+               </div>
+           </div>
     </div>
 </x-app-layout>

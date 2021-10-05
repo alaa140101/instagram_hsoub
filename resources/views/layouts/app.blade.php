@@ -6,6 +6,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" sizes="192x192" href="logo.jpg">
+
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -21,11 +23,36 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <style>
+            .post {
+                position: relative;
+                flex: 1 0 220px;
+                color: #fff;
+                cursor: pointer;
+                width: 293px;
+                height: 293px;
+            }
+            .post:hover .post-info,
+            .post:focus .post-info {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.3);
+            }
+            .post-info {
+                display: none;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="bg-gray-100">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -34,7 +61,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="mt-10 pb-2">
                 {{ $slot }}
             </main>
         </div>
