@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -29,3 +30,5 @@ Route::get('{username}', function($username) {
     }
     return view('profile', ['profile' => $user]);
 })->name('user_profile');
+
+Route::resource('/posts', [PostController::class]);
