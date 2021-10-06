@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+// use App\Models\User;
+
 
 class PostController extends Controller
 {
@@ -14,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'post_caption' => 'string',
+            'image_path' => ['required', 'image'],
+
+        ]);
+        $imagePath = request('image_path')->store('uploads', 'public');
+
+        auth()->user()->posts()->create([
+            'post_caption' => $data['post_caption'],
+            'image_path' => $imagePath,
+        ]);
+
+        return redirect()->route('user_profile', ['username' => auth()->user()->username]);
     }
 
     /**
@@ -46,7 +60,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        if($post == null) {
+            abort(404);
+        }
+        return view('posts.show', compact('post'));
     }
 
     /**

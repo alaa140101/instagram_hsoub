@@ -25,10 +25,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('{username}', function($username) {
     $user = User::where('username', $username)->first();
+    $posts = $user->posts;
     if ($user == null ) {
         abort(404);
     }
-    return view('profile', ['profile' => $user]);
+    return view('profile', ['profile' => $user, 'posts' => $posts]);
 })->name('user_profile');
 
-Route::resource('/posts', [PostController::class]);
+Route::resource('posts', PostController::class);
