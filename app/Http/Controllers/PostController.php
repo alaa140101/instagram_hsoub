@@ -74,7 +74,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+
+        if($post == null) {
+            abort(404);
+        }
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -86,7 +90,32 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        if($post->id == null){
+            abort(404);
+        }
+
+        $data = request()->validate([
+            'post_caption' => 'string',
+            'image_path' => ['image', 'nullable'],
+        ]);
+
+        $imagePath = null;
+        if(request('image_path') != null) {
+            $imagePath = request('image_path')->store('uploads', 'public');
+        }
+        else if($post->image_path != null) {
+            $imagePath = $post->image_path;
+        }
+        else{
+            abort(401);
+        }
+
+        $post->update([
+            'post_caption' => $data['post_caption'],
+            'image_path' => $imagePath,
+        ]);
+
+        return redirect(auth()->user()->username);
     }
 
     /**

@@ -15,9 +15,15 @@
               <img src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" class="rounded-full h-10 w-10 mr-3">
               <a href="/{{ $post->user->username }}" class="font-bold hover:underline">{{ $post->user->username }}</a>
             </div>
-            <div>
-              <button class="bg-blue-500 rounded-lg shadow px-2 py-1 text-white">follow</button>
-            </div>
+           @if (auth()->user()->id == $post->user_id)
+           <div class="text-gray-500">
+             <a href="/posts/{{ $post->id }}/edit"><i class="fas fa-edit"></i></a>
+           </div>
+           @else 
+           <div>
+             <button class="bg-blue-500 rounded-lg shadow px-2 py-1 text-white">follow</button>
+           </div>
+           @endif
           </div>
           <div class="border-b border-solid border-gery-300 h-full">
             <div class="grid grid-cols-5 overflow-y-auto">
