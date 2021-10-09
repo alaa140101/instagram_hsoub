@@ -31,7 +31,7 @@
                 </div>
                 </div>
             </div>
-        </header>        
+        </header>
     </x-slot>
 
     <div class="max-w-4xl my-0 mx-auto">
@@ -49,7 +49,7 @@
                                </li>
                                <li class="inline-block font-semibold">
                                    <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
-                                   <i class="fas fa-comment" aria-hidden="true"></i>12
+                                   <i class="fas fa-comment" aria-hidden="true"></i>{{ $post->comments()->count() }}
                                </li>
                            </ul>
                        </div>

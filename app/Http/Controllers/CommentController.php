@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+
 
 class CommentController extends Controller
 {
@@ -14,7 +16,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -24,7 +26,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -35,7 +37,21 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'post_id' => 'required|integer',
+            'comment' => 'required|string|max:255',
+        ]);
+
+        $post = Post::findOrFail($request->post_id);
+
+        $user_id = auth()->user()->id;
+
+        $post->comments()->create([
+            'user_id' => $user_id,
+            'comment' => $data['comment'],
+        ]);
+
+        return back();
     }
 
     /**
@@ -46,7 +62,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        abort(404);
     }
 
     /**

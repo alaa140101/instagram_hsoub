@@ -69,5 +69,29 @@
         @stack('modals')
 
         @livewireScripts
+
+        <script>
+
+            const img = document.getElementById('postImage');
+            const sec1 = document.getElementById('sec1');
+            const sec3 = document.getElementById('sec3');
+            const sec4 = document.getElementById('sec4');
+            const commentArea = document.getElementById('commentArea');
+
+            if (img!=null) {
+                var imgHeight = img.offsetHeight;
+                var sec1Height = sec1.offsetHeight;
+                var sec3Height = sec3.offsetHeight;
+                var sec4Height = sec4.offsetHeight;
+
+                var height = imgHeight - (sec1Height + sec3Height + sec4Height);
+
+                commentArea.style.maxHeight = height.toString() + "px";
+            }
+
+
+
+
+        </script>
     </body>
 </html>
