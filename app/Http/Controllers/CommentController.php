@@ -73,7 +73,11 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        if ($comment == null) {
+            abort(404);
+        }
+
+        return view('comments.edit', compact('comment'));
     }
 
     /**
@@ -85,7 +89,20 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        if($comment->id == null){
+            abort(404);
+        }
+
+        $data = request()->validate([
+            'comment' => ['string', 'required', 'max:255'],
+        ]);
+
+
+        $comment->update([
+            'comment' => $data['comment'],
+        ]);
+
+        return redirect('posts/'.$comment->post->id);
     }
 
     /**

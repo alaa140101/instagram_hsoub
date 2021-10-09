@@ -51,7 +51,11 @@
               <div class="col-span-4 mt-5 mr-7">
                   <a href="/{{ $comment->user->username }}" class="font-bold hover:underline">{{ $comment->user->username }}</a>
                   <span>{{ $comment->comment }}</span>
-                  <div class="text-gray-500 text-xs">{{ $comment->created_at->format('M j o') }}</div>
+                  <div class="text-gray-500 text-xs">{{ $comment->created_at->format('M j o') }}
+                    @if (auth()->user()->id == $comment->user_id)
+                      <a href="/comments/{{ $comment->id }}/edit" class="text-xs ms-2"><i class="fas fa-edit"></i></a>
+                    @endif
+                </div>
               </div>
               @endforeach
             </div>
