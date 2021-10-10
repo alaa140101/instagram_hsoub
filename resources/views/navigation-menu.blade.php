@@ -8,7 +8,7 @@
                     <div><h1 style="font-family: Norican" class="text-3xl">{{__('Instagram Hsoub')}}</h1></div>
                 </a>
             </div>
-
+            @if (Auth::check())
             <div>
                 <input type="text" placeholder="Search" class="border border-gray-300 border-solid text-center">
             </div>
@@ -94,7 +94,7 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            <x-jet-dropdown-link href="{{ Auth::user()->username }}">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
 
@@ -130,9 +130,24 @@
                     </svg>
                 </button>
             </div>
+            @else
+            <div>
+                <a href="{{ route('login') }}" >
+                    <x-jet-button class="leading-none" >
+                        {{__('Login')}}
+                    </x-jet-button>
+                </a>
+                <a href="{{ route('register') }}" >
+                    <x-jet-button class="ms-4 leading-none">
+                        {{__('SingUp')}}
+                    </x-jet-button>
+                </a>
+            </div>
+            @endif
         </div>
     </div>
 
+    @if (Auth::check())
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
@@ -158,7 +173,7 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                <x-jet-responsive-nav-link href="{{ Auth::user()->username }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
 
@@ -212,4 +227,5 @@
             </div>
         </div>
     </div>
+    @endif
 </nav>

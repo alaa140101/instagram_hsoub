@@ -9,6 +9,7 @@
                     <div class="grid grid-rows-2">
                         <div class="flex flex-row items-center">
                             <h1 class="font-light text-3xl mr-14">{{$profile->username}}</h1>
+                            @if (Auth::user()!=null && Auth::user()->name==$profile->name)
                             <a href="{{route('profile.show')}}" class="border border-solid border-gery-300 rounded-md py-0 px-5 mr-16 whitespace-nowrap">
                                 {{__('Edit Profile')}}</a>
                             <a href="{{ route('posts.create')}}">
@@ -16,6 +17,9 @@
                                     {{__('Add Post')}}
                                 </x-jet-button>
                             </a>
+                            @else
+                             <button class="bg-blue-500 rounded-lg shadow px-2 py-1 text-white">follow</button>
+                            @endif
                         </div>
                         <div>
                             <ul class="flex flex-row mb-5">
