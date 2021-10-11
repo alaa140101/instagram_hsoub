@@ -57,8 +57,10 @@
                   <a href="/{{ $comment->user->username }}" class="font-bold hover:underline">{{ $comment->user->username }}</a>
                   <span>{{ $comment->comment }}</span>
                   <div class="text-gray-500 text-xs">{{ $comment->created_at->format('M j o') }}
-                    @if (auth()->user()->id == $comment->user_id)
-                      <a href="/comments/{{ $comment->id }}/edit" class="text-xs ms-2"><i class="fas fa-edit"></i></a>
+                    @can('update', $comment)
+                    <a href="/comments/{{ $comment->id }}/edit" class="text-xs ms-2"><i class="fas fa-edit"></i></a>
+                    @endcan
+                    @can('delete', $comment)
                       <form action="{{ route('comments.destroy', $comment->id) }}" class="inline-block" method="post">
                         @csrf
                         @method("DELETE")
@@ -66,7 +68,7 @@
                             <i class="fa fa-trash"></i>
                         </button>
                         </form>
-                    @endif
+                    @endcan
                 </div>
               </div>
               @endforeach
@@ -86,6 +88,7 @@
             </div>
           </div>
           <div class="p-4" id="sec4">
+              @if(Auth::check())
               <form action="/comments" method="post" autocomplete="off">
                 @csrf
                     <div class="flex flex-row items-center justify-between">
@@ -94,6 +97,9 @@
                         <button class="text-blue-500 font-semibold hover:text-blue-700" type="submit">{{__('Post')}}</button>
                     </div>
               </form>
+              @else
+              <a href="{{ route('login') }}" class="text-blue-500 text-sm">{{__('Logn In')}}</a><span class="text-sm">{{__(' to like or comment')}}
+              @endif
           </div>
         </div>
       </div>
