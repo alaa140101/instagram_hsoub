@@ -26,27 +26,12 @@ class Post extends Model
 
     public function likedByUsers() {
         return $this->belongsToMany(User::class, 'likes');
-    }
-
-    public function like(User $user) {
-        return $this->likedByUsers()->save($user);
-    }
-
-    public function dislike(User $user) {
-        return $this->likedByUsers()->detach($user);
-    }
+    }    
 
     public function likedByUser(User $user) {
         return (bool)DB::table('likes')->where('user_id', $user->id)->where('post_id', $this->id)->count();
     }
 
-    public function likeSystem(User $user) {
-        
-        if($this->likedByUser($user)) {
-            return $this->dislike($user);
-        }else {
-            return $this->like($user);
-        }
-    }
+    
 
 }

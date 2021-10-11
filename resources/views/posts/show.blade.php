@@ -77,7 +77,7 @@
           <div class="flex flex-col" id="sec3">
             <div class="flex flex-col items-start pl-4 pb-1">
               <div class="flex flex-row items-center">
-                <button class="text-2xl mr-3 focus:outline-none"><i class="far fa-heart"></i></button>
+                @livewire('like-button', ['post_id' => $post->id], key($post->id))
                 <button class="text-2xl mr-3 focus:outline-none"><i class="far fa-comment"></i></button>
                 <button class="text-2xl mr-3 focus:outline-none"><i class="far fa-square"></i></button>
               </div>
