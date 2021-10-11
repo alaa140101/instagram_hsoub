@@ -17,23 +17,28 @@
               <img src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" class="rounded-full h-10 w-10 mr-3">
               <a href="/{{ $post->user->username }}" class="font-bold hover:underline">{{ $post->user->username }}</a>
             </div>
-           @if (auth()->user()->id == $post->user_id)
+
+           {{-- @if (auth()->user()->id == $post->user_id) --}}
+           @can('update', $post)
+
            <div class="text-gray-500">
-             <a href="/posts/{{ $post->id }}/edit"><i class="fas fa-edit"></i></a>
-           <span class="font-bold mx-2">|</span>
-           <form action="{{ route('posts.destroy', $post->id) }}" class="inline-block" method="post">
-            @csrf
-            @method("DELETE")
-            <button type="submit" onclick="return confirm('Are you sure you want to delete this post')" >
-                <i class="fa fa-trash"></i>
-            </button>
-            </form>
-        </div>
-           @else
+                <a href="/posts/{{ $post->id }}/edit"><i class="fas fa-edit"></i></a>
+            <span class="font-bold mx-2">|</span>
+            <form action="{{ route('posts.destroy', $post->id) }}" class="inline-block" method="post">
+                @csrf
+                @method("DELETE")
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this post')" >
+                    <i class="fa fa-trash"></i>
+                </button>
+                </form>
+            </div>
+            @endcan
+
+           @cannot('update', $post)
            <div>
-             <button class="bg-blue-500 rounded-lg shadow px-2 py-1 text-white">follow</button>
-           </div>
-           @endif
+               <button class="bg-blue-500 rounded-lg shadow px-2 py-1 text-white">follow</button>
+            </div>
+            @endcannot
           </div>
           <div class="border-b border-solid border-gery-300 h-full">
             <div class="grid grid-cols-5 overflow-y-auto" id="commentArea">
