@@ -18,7 +18,7 @@
                                 </x-jet-button>
                             </a>
                             @else
-                             <button class="bg-blue-500 rounded-lg shadow px-2 py-1 text-white">follow</button>
+                            @livewire('follow-button', ['profile_id' => $profile->id], key($profile->id))
                             @endif
                         </div>
                         <div>
