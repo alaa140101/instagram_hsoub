@@ -24,10 +24,11 @@ class LikeButton extends Component
             $this->post->likedByUser(auth()->user()) ? $this->isLiked = true : $this->isLiked = false;
         }
 
-        $this->likeCount = $this->post->likedByUsers()->Count();
+        $this->likeCount = $this->post->likedByUsers->Count();
     }
 
     public function ToggleLike($post_id) {
+
         $this->post = Post::find($post_id);
         if($this->post!=null && auth()->user()!=null) {
             $this->post->likedByUsers()->toggle(auth()->user());
@@ -35,6 +36,6 @@ class LikeButton extends Component
         }else{
             redirect(route('login'));
         }
-        $this->likeCount = $this->post->likedByUsers()->Count();
+        $this->likeCount = $this->post->likedByUsers->Count();
     }
 }
