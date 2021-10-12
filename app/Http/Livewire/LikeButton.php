@@ -10,7 +10,8 @@ class LikeButton extends Component
     private $post;
     public $post_id;
     public $isLiked;
-    
+    public $likeCount;
+
     public function render()
     {
         return view('livewire.like-button');
@@ -22,6 +23,8 @@ class LikeButton extends Component
         if($this->post!=null && auth()->user()!=null) {
             $this->post->likedByUser(auth()->user()) ? $this->isLiked = true : $this->isLiked = false;
         }
+
+        $this->likeCount = $this->post->likedByUsers()->Count();
     }
 
     public function ToggleLike($post_id) {
@@ -32,5 +35,6 @@ class LikeButton extends Component
         }else{
             redirect(route('login'));
         }
+        $this->likeCount = $this->post->likedByUsers()->Count();
     }
 }
