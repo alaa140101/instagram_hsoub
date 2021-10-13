@@ -24,12 +24,16 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return redirect()->route('user_profile', ['username' => auth()->user()->username]);
 })->name('dashboard');
 
+Route::get('/followers', function() {
+    return view('followers', ['profile' => auth()->user(), 'followers'=>auth()->user()->followers()->get()]);
+})->name('followers')->middleware('auth:sanctum');
+
 Route::get('{username}', function($username) {
     $user = User::where('username', $username)->first();
-    $posts = $user->posts;
     if ($user == null ) {
         abort(404);
     }
+    $posts = $user->posts;
     return view('profile', ['profile' => $user, 'posts' => $posts]);
 })->name('user_profile');
 

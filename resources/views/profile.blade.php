@@ -24,7 +24,11 @@
                         <div>
                             <ul class="flex flex-row mb-5">
                                 <li class="mr-10 cursor-pointer"><span class="font-semibold">{{ $profile->posts->count() }}</span>{{__('posts')}}</li>
-                                <li class="mr-10"><a href="#"><span class="font-semibold">50</span>{{__('followers')}}</a></li>
+                                <li class="mr-10">
+                                    <a href="{{ route('followers') }}">
+                                        <span class="font-semibold"></span>{{__('followers')}}
+                                    </a>
+                                </li>
                                 <li class="mr-10"><a href="#"><span class="font-semibold">30</span>{{__('following')}}</a></li>
                             </ul>
                             <p class="mb-1 font-black">{{ $profile->name }}</p>
