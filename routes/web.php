@@ -28,6 +28,10 @@ Route::get('/followers', function() {
     return view('followers', ['profile' => auth()->user(), 'followers'=>auth()->user()->followers()->get()]);
 })->name('followers')->middleware('auth:sanctum');
 
+Route::get('/following', function() {
+    return view('following', ['profile' => auth()->user(), 'following'=>auth()->user()->follows()->get()]);
+})->name('following')->middleware('auth:sanctum');
+
 Route::get('{username}', function($username) {
     $user = User::where('username', $username)->first();
     if ($user == null ) {
