@@ -13,7 +13,7 @@ class AddAcceptedFieldToFollowsTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('follows', function (Blueprint $table) {
             $table->boolean('accepted')->default('0');
         });
     }
