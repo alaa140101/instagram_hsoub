@@ -27,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('view-profile', function ($user , User $profile) {
-            if ($profile->status == 'public' || $user->id === $profile->id || $user->following($profile))
+            if ($profile->status == 'public' || $user->id === $profile->id || $user->followingAndAccepted($profile))
             return true;
             else
             return false;

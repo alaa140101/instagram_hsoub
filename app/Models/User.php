@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -81,5 +82,59 @@ class User extends Authenticatable
 
     public function following(User $user) {
         return $this->follows()->where('following_user_id', $user->id)->exists();
+    }
+
+    public function setAccepted(User $user) {
+
+        if($user->status == 'public') {
+            DB::table('follows')
+            ->where('user_id', $this->id)
+            ->where('following_user_id', $user->id)
+            ->update([
+                'accepted' => true,
+            ]);
+        }
+    }
+
+    public function accepted(User $user) {
+
+        if($this->status == 'public') {
+            return true;
+        }else{
+            return (bool) DB::table('follows')
+            ->where('user_id', $user->id)
+            ->where('following_user_id', $this->id)
+            ->where('accepted', true)->count();
+        }
+    }
+
+    public function FollowReq() {
+        if($this->status == 'private') {
+            return $this->followers()
+            ->where('following_user_id', $this->id)
+            ->where('accepted', false)
+            ->latest()->get();
+        }
+        return null;
+    }
+
+    public function pendingFollowingReq() {
+        return $this->follows()
+        ->where('user_id', $this->id)
+        ->where('accepted', false)
+        ->latest()->get();
+    }
+
+    public function followingAndAccepted(User $user) {
+        return $this->follows()->where('following_user_id',$user->id)->where('accepted', true)->exists();
+    }
+
+    public function toggleAccepted(User $user, $state) {
+        return DB::table('follows')
+        ->where('user_id', $user->id)
+        ->where('following_user_id', $this->id)
+        ->update([
+            'accepted' => $state,
+        ]);
     }
 }

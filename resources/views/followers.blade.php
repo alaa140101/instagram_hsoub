@@ -16,6 +16,9 @@
                                     <h3 class="text-sm text-gray-500 truncate whitespace-nowrap" style="max-width: 25ch">{{$follower->bio}}</h3>
                                 </div>
                             </div>
+                            @if($follower->status == 'private')
+                                @livewire('accept-follow', ['profile_id' => $follower->id], key($follower->username))
+                            @endif 
                             @livewire('follow-button', ['profile_id' => $follower->id], key($follower->id))
                         </div>
                     </div>
