@@ -44,26 +44,57 @@
 
     <div class="max-w-4xl my-0 mx-auto">
         <hr class="mb-10">
-           <div class="grid grid-cols-3 gap-4 mx-0 mt-0 mb-6">
-               @foreach ($posts as $post)
-               <div class="post">
-                   <a href="/posts/{{ $post->id }}" class="w-full h-full">
-                       <img src="/storage/{{ $post->image_path }}" alt="" class="w-full h-full object-cover">
-                       <div class="post-info">
-                           <ul>
-                               <li class="inline-block font-semibold mr-7">
-                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
-                                   <i class="fas fa-heart" aria-hidden="true"></i>33
-                               </li>
-                               <li class="inline-block font-semibold">
-                                   <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
-                                   <i class="fas fa-comment" aria-hidden="true"></i>{{ $post->comments()->count() }}
-                               </li>
-                           </ul>
-                       </div>
-                   </a>
-               </div>
-               @endforeach
-           </div>
+        @if($profile->status == 'public')
+            <div class="grid grid-cols-3 gap-4 mx-0 mt-0 mb-6">
+                @foreach ($posts as $post)
+                <div class="post">
+                    <a href="/posts/{{ $post->id }}" class="w-full h-full">
+                        <img src="/storage/{{ $post->image_path }}" alt="" class="w-full h-full object-cover">
+                        <div class="post-info">
+                            <ul>
+                                <li class="inline-block font-semibold mr-7">
+                                    <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                    <i class="fas fa-heart" aria-hidden="true"></i>33
+                                </li>
+                                <li class="inline-block font-semibold">
+                                    <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                    <i class="fas fa-comment" aria-hidden="true"></i>{{ $post->comments()->count() }}
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        @else
+            @can('view-profile', $profile)
+            <div class="grid grid-cols-3 gap-4 mx-0 mt-0 mb-6">
+                @foreach ($posts as $post)
+                <div class="post">
+                    <a href="/posts/{{ $post->id }}" class="w-full h-full">
+                        <img src="/storage/{{ $post->image_path }}" alt="" class="w-full h-full object-cover">
+                        <div class="post-info">
+                            <ul>
+                                <li class="inline-block font-semibold mr-7">
+                                    <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
+                                    <i class="fas fa-heart" aria-hidden="true"></i>33
+                                </li>
+                                <li class="inline-block font-semibold">
+                                    <span class="absolute h-1 w-1 overflow-hidden">{{__('Comments:')}}</span>
+                                    <i class="fas fa-comment" aria-hidden="true"></i>{{ $post->comments()->count() }}
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <div>
+                <h1 class="text-center">{{__('This account is private')}}</h1>
+                <p class="text-center">{{__('Follow to see their posts')}}</p>
+            </div>
+            @endcan
+           @endif
     </div>
 </x-app-layout>

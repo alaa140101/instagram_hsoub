@@ -80,6 +80,16 @@
             <x-jet-input-error for="url" class="mt-2" />
         </div>
 
+        <!-- STATUS -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="status" value="{{ __('STATUS') }}" />
+            <select id="status" type="text" class="mt-1 block w-full form-input rounded-md shadow-sm" wire:model.defer="state.status" autocomplete="status" >
+                <option value="public">{{__('Public')}}</option>
+                <option value="private">{{__('Private')}}</option>
+            </select>
+            <x-jet-input-error for="status" class="mt-2" />
+        </div>
+
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
