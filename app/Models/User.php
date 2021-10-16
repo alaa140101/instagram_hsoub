@@ -137,4 +137,9 @@ class User extends Authenticatable
             'accepted' => $state,
         ]);
     }
+
+    public function home() {
+        $ids = $this->follows()->where('accepted', true)->get()->pluck('id');
+        return Post::whereIn('user_id', $ids)->latest()->get();
+    }
 }

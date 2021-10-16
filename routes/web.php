@@ -16,28 +16,34 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+
+    Route::get('/', function () {
+        return redirect()->route('user_profile', ['username' => auth()->user()->username]);
+    });
+
+    Route::get('/home', function() {
+        return view('home', ['posts' => auth()->user()->home()]);
+    })->name('home');
+
+    Route::get('/followers', function() {
+        return view('followers', ['profile' => auth()->user(), 'followers'=>auth()->user()->followers()->get()]);
+    })->name('followers');
+
+    Route::get('/following', function() {
+        return view('following', ['profile' => auth()->user(), 'following'=>auth()->user()->follows()->get()]);
+    })->name('following');
+
+    Route::get('/inbox', function(){
+        $user = auth()->user();
+        $requests = $user->FollowReq();
+        $pendings = $user->pendingFollowingReq();
+        return view('inbox', ['profile' => $user, 'requests'=>$requests, 'pendings'=>$pendings]);
+    })->name('inbox');
+
+    Route::resource('comments', CommentController::class);
+
 });
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return redirect()->route('user_profile', ['username' => auth()->user()->username]);
-})->name('dashboard');
-
-Route::get('/followers', function() {
-    return view('followers', ['profile' => auth()->user(), 'followers'=>auth()->user()->followers()->get()]);
-})->name('followers')->middleware('auth:sanctum');
-
-Route::get('/following', function() {
-    return view('following', ['profile' => auth()->user(), 'following'=>auth()->user()->follows()->get()]);
-})->name('following')->middleware('auth:sanctum');
-
-Route::get('/inbox', function(){
-    $user = auth()->user();
-    $requests = $user->FollowReq();
-    $pendings = $user->pendingFollowingReq();
-    return view('inbox', ['profile' => $user, 'requests'=>$requests, 'pendings'=>$pendings]);
-})->name('inbox')->middleware('auth:sanctum');
 
 Route::get('{username}', function($username) {
     $user = User::where('username', $username)->first();
@@ -50,4 +56,3 @@ Route::get('{username}', function($username) {
 
 Route::resource('posts', PostController::class);
 
-Route::resource('comments', CommentController::class);
