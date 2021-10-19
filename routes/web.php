@@ -23,7 +23,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     });
 
     Route::get('/home', function() {
-        return view('home', ['posts' => auth()->user()->home()]);
+        $profile = auth()->user();
+        $iFollow = $profile->iFollow()->take(3);
+        $toFollow = $profile->otherUsers()->take(3);
+        // return view('home', ['posts' => auth()->user()->home()]);
+        return view('home', compact('posts', auth()->user()->home(), 'profile', $profile, 'iFollow', $iFollow, 'toFollow', $toFollow));
     })->name('home');
 
     Route::get('/followers', function() {

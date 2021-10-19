@@ -29,7 +29,6 @@
                     <span>{{$comment->comment}}</span>
                 </div>
                 @endforeach
-
                 <div class="text-gray-500 text-xs">
                     {{$post->created_at->format('M j o')}}
                 </div>
@@ -38,7 +37,7 @@
                     <form action="/comments" method="post" autocomplete="off">
                      @csrf
                      <div class="flex flex-row items-center justify-between">
-                         <input type="text" id="{{$post->id}}" class="w-full outline-none" placeholder="{{__('Add Comment')}}" name="comment">
+                         <input type="text" id="{{$post->id}}" class="w-full outline-none border-none p-0" placeholder="{{__('Add Comment')}}" name="comment">
                          <input type="hidden" name="post_id" value="{{$post->id}}">
                          <button class="text-blue-500 font-semibold hover:text-blue-700" type="submit">{{__('Post')}}</button>
                      </div>
@@ -49,6 +48,32 @@
             <div class="m-10">
                 <p class="font-semibold">{{__('Start your journey, follow your friends!')}}</p>
             </div>
+            @endforelse
+        </div>
+        <div class="col-start-8 col-span-3 ml-4">
+            <div class="flex flex-row items-center">
+                <a href="/{{$profile->username}}"><img src="{{ $profile->profile_photo_url }}" alt="avatar" class="rounded-full h-12 w-12 mr-3"></a>
+                <div class="flex flex-col">
+                    <a href="/{{$profile->username}}" class="text-base hover:underline">{{$profile->username}}</a>
+                    <h3 class="text-sm text-gray-400">{{$profile->bio}}</h3>
+                </div>
+            </div>
+            <h3 class="mt-4 mb-4 text-gray-500 font-semibold">{{__(' people you follow:')}}</h3>
+            @forelse ($iFollow as $follow)
+            <div class="flex flex-col mb-3">
+                <div class="flex flex-row justify-between">
+                    <div class="flex flex-row">
+                        <a href="/{{$follow->username}}"><img src="{{ $follow->profile_photo_url }}" alt="avatar" class="rounded-full h-10 w-10 mr-3" ></a>
+                        <div class="flex flex-col self-center">
+                            <a href="/{{$follow->username}}" class="text-base hover:underline">{{$follow->username}}</a>
+                            <h3 class="text-sm text-gray-500 truncate" style="max-width: 25ch">{{$follow->bio}}</h3>
+                        </div>
+                    </div>
+                    @livewire('follow-button', ['profile_id' => $follow->id], key($follower->id))
+                </div>
+            </div>
+            @empty
+
             @endforelse
         </div>
     </div>
