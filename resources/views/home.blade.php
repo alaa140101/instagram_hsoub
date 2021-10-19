@@ -3,7 +3,7 @@
     </x-slot>
 
     <div class="grid grid-cols-12 mt-7 gap-4">
-        <div class="col-start-5 col-span-5">
+        <div class="col-start-3 col-span-5">
 
             @forelse ($posts as $post)
             <div class="flex flex-col border-solid border-gray-300 mb-14 bg-white">
@@ -73,7 +73,29 @@
                 </div>
             </div>
             @empty
+            <div class="my-10">
+                <p class="font-semibold">{{__('Nothing to show right now!')}}</p>
+            </div>
+            @endforelse
+            <h3 class="mt-4 mb-4 text-gray-500 font-semibold">{{__('People you may like to follow:')}}</h3>
 
+            @forelse ($toFollow as $follow)
+                <div class="flex flex-col mb-3">
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-row">
+                            <a href="/{{$follow->username}}"><img src="{{ $follow->profile_photo_url }}" alt="avatar" class="rounded-full h-10 w-10 mr-3"></a>
+                            <div class="flex flex-col self-center">
+                                <a href="/{{$follow->username}}" class="text-base hover:underline">{{$follow->username}}</a>
+                                <h3 class="text-sm text-gray-500 truncate" style="max-width: 25ch">{{$follow->bio}}</h3>
+                            </div>
+                        </div>
+                        @livewire('follow-button', ['profile_id' => $follow->id], key($follower->id))
+                    </div>
+                </div>
+            @empty
+            <div class="my-10">
+                <p class="font-semibold">{{__('Nothing to show right now!')}}</p>
+            </div>    
             @endforelse
         </div>
     </div>
