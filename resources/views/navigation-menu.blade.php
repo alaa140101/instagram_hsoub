@@ -67,7 +67,7 @@
                 <!-- Settings Dropdown -->
                 <div class="sm:flex sm:items-center sm:ms-6">
                     <a href="{{ route('home') }}" class="text-2xl mx-2 text-gray-700"><i class="fas fa-home"></i></a>
-                    <a href="#" class="text-2xl mx-2 text-gray-700"><i class="fas fa-compass"></i></a>
+                    <a href="{{ route('explore') }}" class="text-2xl mx-2 text-gray-700"><i class="fas fa-compass"></i></a>
                     <a href="{{ route('inbox') }}" class="text-2xl mx-2 text-gray-700"><i class="fas fa-inbox"></i></a>
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">

@@ -157,4 +157,14 @@ class User extends Authenticatable
         $others = array_merge($ifollow, $pendingFollow);
         return User::whereNotIn('id', $others)->latest()->get();
     }
+
+    public function explore() {
+
+        $ifollow = $this->iFollow()->pluck('id')->toArray();
+        array_push($ifollow, $this->id);
+        $public = User::where('status', 'private')->pluck('id')->toArray();
+        $others = array_merge($ifollow, $public);
+
+        return Post::whereNotIn('user_id', $others)->latest()->get();
+    }
 }
