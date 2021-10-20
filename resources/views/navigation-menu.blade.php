@@ -9,9 +9,8 @@
                 </a>
             </div>
             @if (Auth::check())
-            <div>
-                <input type="text" placeholder="Search" class="border border-gray-300 border-solid text-center">
-            </div>
+            
+            @livewire('search')
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
