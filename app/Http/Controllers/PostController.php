@@ -49,12 +49,14 @@ class PostController extends Controller
         ]);
         $imagePath = request('image_path')->store('uploads', 'public');
 
-        auth()->user()->posts()->create([
-            'post_caption' => $data['post_caption'],
-            'image_path' => $imagePath,
-        ]);
+        // auth()->user()->posts()->create([
+        //     'post_caption' => $data['post_caption'],
+        //     'image_path' => $imagePath,
+        // ]);
 
-        return redirect()->route('user_profile', ['username' => auth()->user()->username]);
+        // return redirect()->route('user_profile', ['username' => auth()->user()->username]);
+
+        return view('applyFilters', ['post_caption' => $data['post_caption'], 'image_path' => $imagePath]);
     }
 
     /**
