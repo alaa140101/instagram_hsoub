@@ -31,17 +31,17 @@ class Filters extends Component
 
         $this->correctImageOrientation($this->image_path, IMG_FILTER_NEGATE, $this->filter1, null, null, null, null, 0);
         $this->correctImageOrientation($this->image_path, IMG_FILTER_GRAYSCALE, $this->filter2, null, null, null, null, 0);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_BRIGHTNESS, $this->filter3, null, null, null, null, 0);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_CONTRAST, $this->filter4, null, null, null, null, 0);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_COLORIZE, $this->filter5, null, null, null, null, 0);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_EDGEDETECT, $this->filter6, null, null, null, null, 0);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_GAUSSIAN_BLUR, $this->filter7, null, null, null, null, 0);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_SELECTIVE_BLUR, $this->filter8, 100, 50, 0, null, 0);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_EMBOSS, $this->filter9, 20, null, null, null, 1);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_MEAN_REMOVAL, $this->filter10, 80, null, null, null, 1);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_EMBOSS, $this->filter3, 20, null, null, null, 1);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_GAUSSIAN_BLUR, $this->filter4, 40, null, null, null, 1);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_EDGEDETECT, $this->filter5, 20, 40, 0, null, 3);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_SELECTIVE_BLUR, $this->filter6, null, null, null, null, 0);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_MEAN_REMOVAL, $this->filter7, null, null, null, null, 0);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_COLORIZE, $this->filter8, 100, 50, 0, null, 3);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_CONTRAST, $this->filter9, 20, null, null, null, 1);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_SMOOTH, $this->filter10, 80, null, null, null, 1);
         $this->correctImageOrientation($this->image_path, IMG_FILTER_SMOOTH, $this->filter11, 20, null, null, null, 1);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_PIXELATE, $this->filter12, 50, null, null, null, 2);
-        $this->correctImageOrientation($this->image_path, IMG_FILTER_SCATTER, $this->filter13, 80, null, null, null, 1);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_PIXELATE, $this->filter12, 50, true, null, null, 2);
+        $this->correctImageOrientation($this->image_path, IMG_FILTER_CONTRAST, $this->filter13, 80, null, null, null, 1);
     }
 
     public function applyFilter($num) {
@@ -86,7 +86,7 @@ class Filters extends Component
             break;
             case 13:
                 rename($this->filter13, "storage/".$this->image_path);
-            break;               
+            break;
         }
         auth()->user()->posts()->create([
             'post_caption' => $this->post_caption,
@@ -100,7 +100,7 @@ class Filters extends Component
         return view('livewire.filters');
     }
 
-    public function correctImageOrientation($imagePath, $effect, $newImagePath, $arg1, $arg2, $arg3, $arg4, $argnum) 
+    public function correctImageOrientation($imagePath, $effect, $newImagePath, $arg1, $arg2, $arg3, $arg4, $argnum)
     {
         $img = imagecreatefromstring(file_get_contents("storage/".$imagePath));
         if(@exif_read_data("storage/".$imagePath)){
@@ -111,11 +111,11 @@ class Filters extends Component
                     $deg = 0;
                     // orientation
                     switch ($orientation) {
-                        case 3: 
+                        case 3:
                             $deg = 180;
                             $img = imagerotate($img, $deg, 0);
                             break;
-                        case 6: 
+                        case 6:
                             $deg = 270;
                             $img = imagerotate($img, $deg, 0);
                             break;
@@ -123,26 +123,26 @@ class Filters extends Component
                             $deg = 90;
                             $img = imagerotate($img, $deg, 0);
                             break;
-                        default: 
+                        default:
                             $img = imagerotate($img, $deg, 0);
                             break;
                     }
-                    
+
                     //filter
                     switch ($argnum){
-                        case '0': 
+                        case '0':
                             imagefilter($img, $effect);
                             break;
-                        case '1': 
+                        case '1':
                             imagefilter($img, $effect, $arg1);
                             break;
-                        case '2': 
+                        case '2':
                             imagefilter($img, $effect, $arg1, $arg2);
                             break;
-                        case '3': 
+                        case '3':
                             imagefilter($img, $effect, $arg1, $arg2, $arg3);
                             break;
-                        case '4': 
+                        case '4':
                             imagefilter($img, $effect, $arg1, $arg2, $arg3, $arg4);
                             break;
                     }
@@ -154,51 +154,51 @@ class Filters extends Component
             else{
                 //filter
                 switch ($argnum){
-                   case '0': 
+                   case '0':
                        imagefilter($img, $effect);
                        break;
-                   case '1': 
+                   case '1':
                        imagefilter($img, $effect, $arg1);
                        break;
-                   case '2': 
+                   case '2':
                        imagefilter($img, $effect, $arg1, $arg2);
                        break;
-                   case '3': 
+                   case '3':
                        imagefilter($img, $effect, $arg1, $arg2, $arg3);
                        break;
-                   case '4': 
+                   case '4':
                        imagefilter($img, $effect, $arg1, $arg2, $arg3, $arg4);
                        break;
                }
-   
+
                imagejpeg($img, $newImagePath, 100);
                imagedestroy($img);
-               
-               }        
+
+               }
             }
             else{
              //filter
              switch ($argnum){
-                case '0': 
+                case '0':
                     imagefilter($img, $effect);
                     break;
-                case '1': 
+                case '1':
                     imagefilter($img, $effect, $arg1);
                     break;
-                case '2': 
+                case '2':
                     imagefilter($img, $effect, $arg1, $arg2);
                     break;
-                case '3': 
+                case '3':
                     imagefilter($img, $effect, $arg1, $arg2, $arg3);
                     break;
-                case '4': 
+                case '4':
                     imagefilter($img, $effect, $arg1, $arg2, $arg3, $arg4);
                     break;
             }
 
             imagejpeg($img, $newImagePath, 100);
             imagedestroy($img);
-            
+
             }
     }
 
