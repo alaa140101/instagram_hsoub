@@ -44,7 +44,8 @@
                     <form action="/comments" method="post" autocomplete="off">
                      @csrf
                      <div class="flex flex-row items-center justify-between">
-                         <input type="text" id="{{$post->id}}" class="w-full outline-none border-none p-0" placeholder="{{__('Add Comment')}}" name="comment">
+                         <input type="text" id="comment{{$post->id}}" class="w-full outline-none border-none p-0"
+                         placeholder="{{__('Add Comment')}}" name="comment" >
                          <input type="hidden" name="post_id" value="{{$post->id}}">
                          <button class="text-blue-500 font-semibold hover:text-blue-700" type="submit">{{__('Post')}}</button>
                      </div>

@@ -36,7 +36,7 @@
 
            @cannot('update', $post)
            <div>
-            @livewire('follow-button', ['profile_id' => $post->user->id ], key($post->user->id))    
+            @livewire('follow-button', ['profile_id' => $post->user->id ], key($post->user->id))
             </div>
             @endcannot
           </div>
@@ -85,7 +85,7 @@
               <form action="/comments" method="post" autocomplete="off">
                 @csrf
                     <div class="flex flex-row items-center justify-between">
-                        <input type="text" class="w-full outline-none border-none p-1" id="comment" placeholder="{{__('Add Comment') }}" name="comment" autofocus>
+                        <input type="text" class="w-full outline-none border-none p-1" id="comment{{$post->id}}" placeholder="{{__('Add Comment') }}" name="comment" autofocus>
                         <input type="hidden" name="post_id" value="{{ $post->id }}" />
                         <button class="text-blue-500 font-semibold hover:text-blue-700" type="submit">{{__('Post')}}</button>
                     </div>

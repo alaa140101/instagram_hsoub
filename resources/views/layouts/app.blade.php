@@ -89,6 +89,12 @@
                 commentArea.style.maxHeight = height.toString() + "px";
             }
 
+            function copyToClipboard(id) {
+                var postlink = document.getElementById(id);
+                navigator.clipboard.writeText(postlink.value);
+                alert("The shareable link: " + postlink.value);
+            }
+
 
 
 
