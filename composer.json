@@ -9,6 +9,7 @@
         "barryvdh/laravel-ide-helper": "^2.10",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "kkomelin/laravel-translatable-string-exporter": "^1.14",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",

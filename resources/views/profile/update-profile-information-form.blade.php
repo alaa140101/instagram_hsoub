@@ -90,6 +90,16 @@
             <x-jet-input-error for="status" class="mt-2" />
         </div>
 
+        <!-- LANGUAGE -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="language" value="{{ __('LANGUAGE') }}" />
+            <select id="language" type="text" class="mt-1 block w-full form-input rounded-md shadow-sm" wire:model.defer="state.language" autocomplete="language" >
+                <option value="ar">{{__('عربي')}}</option>
+                <option value="en">{{__('English')}}</option>
+            </select>
+            <x-jet-input-error for="language" class="mt-2" />
+        </div>
+
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
