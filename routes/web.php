@@ -16,7 +16,7 @@ use App\Models\User;
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+Route::middleware(['auth:sanctum', 'verified', 'language'])->group(function() {
 
     Route::get('/', function () {
         return redirect()->route('user_profile', ['username' => auth()->user()->username]);
@@ -62,7 +62,7 @@ Route::get('{username}', function($username) {
     }
     $posts = $user->posts()->paginate(4);
     return view('profile', ['profile' => $user, 'posts' => $posts]);
-})->name('user_profile');
+})->name('user_profile')->middleware('language');
 
-Route::resource('posts', PostController::class);
+Route::resource('posts', PostController::class)->middleware('language');
 

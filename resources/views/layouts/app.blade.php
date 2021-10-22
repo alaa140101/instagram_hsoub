@@ -47,9 +47,15 @@
             .post-info {
                 display: none;
             }
+            .rtl {
+                direction: rtl;
+            }
+            .ltr {
+                direction: ltr;
+            }
         </style>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased {{ isset($rtl) ? 'rtl' : 'ltr'}}">
         <x-jet-banner />
 
         <div class="bg-gray-100">

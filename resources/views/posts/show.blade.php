@@ -14,7 +14,7 @@
         <div class="col-span-2 bg-white flex flex-col">
           <div class="flex flex-row p-3 border-b border-solid border-gery-300 items-center justify-between" id="sec1">
             <div class="flex flex-row items-center">
-              <img src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" class="rounded-full h-10 w-10 mr-3">
+              <img src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" class="rounded-full h-10 w-10 me-3">
               <a href="/{{ $post->user->username }}" class="font-bold hover:underline">{{ $post->user->username }}</a>
             </div>
 
@@ -45,7 +45,7 @@
               <div class="col-span-1 m-3">
                 <img src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" class="rounded-full h-10 w-10">
               </div>
-              <div class="col-span-4 mt-5 mr-7">
+              <div class="col-span-4 mt-5 me-7">
                 <a href="/{{ $post->user->username }}" class="font-bold hover:underline">{{ $post->user->username }}</a>
                 <span>{{ $post->post_caption }}</span>
               </div>
@@ -53,7 +53,7 @@
               <div class="col-span-1 m-3">
                   <img src="{{ $comment->user->profile_photo_url }}" alt="{{ $comment->user->username }}" class="rounded-full h-10 w-10">
               </div>
-              <div class="col-span-4 mt-5 mr-7">
+              <div class="col-span-4 mt-5 me-7">
                   <a href="/{{ $comment->user->username }}" class="font-bold hover:underline">{{ $comment->user->username }}</a>
                   <span>{{ $comment->comment }}</span>
                   <div class="text-gray-500 text-xs">{{ $comment->created_at->format('M j o') }}
@@ -76,7 +76,7 @@
           </div>
           <div class="flex flex-col" id="sec3">
               @livewire('like-button', ['post_id' => $post->id], key($post->id))
-            <div class="border-b border-solid border-gery-300 pl-4 pb-1 text-xs">
+            <div class="border-b border-solid border-gery-300 ps-4 pb-1 text-xs">
               {{ $post->created_at->format('M j o') }}
             </div>
           </div>

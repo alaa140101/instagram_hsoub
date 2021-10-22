@@ -10,7 +10,7 @@
                     <div class="flex flex-col mb-3">
                         <div class="flex flex-row justify-around">
                             <div class="flex flex-row">
-                                <a href="/{{$follower->username}}"><img src="{{ $follower->profile_photo_url }}" alt="avatar" class="rounded-full h-10 w-10 mr-3" /></a>
+                                <a href="/{{$follower->username}}"><img src="{{ $follower->profile_photo_url }}" alt="avatar" class="rounded-full h-10 w-10 me-3" /></a>
                                 <div class="flex flex-col self-center">
                                     <a href="/{{$follower->username}}" class="text-base hover:underline whitespace-nowrap">{{ $follower->username }}</a>
                                     <h3 class="text-sm text-gray-500 truncate whitespace-nowrap" style="max-width: 25ch">{{$follower->bio}}</h3>

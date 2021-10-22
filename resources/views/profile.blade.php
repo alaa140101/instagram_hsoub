@@ -8,12 +8,12 @@
                 <div class="col-start-3 col-span-2 flex justify-start items-center w-auto m-0">
                     <div class="grid grid-rows-2">
                         <div class="flex flex-row items-center">
-                            <h1 class="font-light text-3xl mr-14">{{$profile->username}}</h1>
+                            <h1 class="font-light text-3xl me-14">{{$profile->username}}</h1>
                             @if (Auth::user()!=null && Auth::user()->name==$profile->name)
-                            <a href="{{route('profile.show')}}" class="border border-solid border-gery-300 rounded-md py-0 px-5 mr-16 whitespace-nowrap">
+                            <a href="{{route('profile.show')}}" class="border border-solid border-gery-300 rounded-md py-0 px-5 me-16 whitespace-nowrap">
                                 {{__('Edit Profile')}}</a>
                             <a href="{{ route('posts.create')}}">
-                                <x-jet-button class="ml-8 leading-none whitespace-nowrap">
+                                <x-jet-button class="ms-8 leading-none whitespace-nowrap">
                                     {{__('Add Post')}}
                                 </x-jet-button>
                             </a>
@@ -23,13 +23,13 @@
                         </div>
                         <div>
                             <ul class="flex flex-row mb-5">
-                                <li class="mr-10 cursor-pointer"><span class="font-semibold">{{ $profile->posts->count() }}</span>{{__('posts')}}</li>
-                                <li class="mr-10">
+                                <li class="me-10 cursor-pointer"><span class="font-semibold">{{ $profile->posts->count() }}</span>{{__('posts')}}</li>
+                                <li class="me-10">
                                     <a href="{{ route('followers') }}">
                                         <span class="font-semibold">{{$profile->followers()->count()}}</span>{{__('followers')}}
                                     </a>
                                 </li>
-                                <li class="mr-10"><a href="{{route('following')}}"><span class="font-semibold">{{$profile->follows()->count()}}</span>{{__('following')}}</a></li>
+                                <li class="me-10"><a href="{{route('following')}}"><span class="font-semibold">{{$profile->follows()->count()}}</span>{{__('following')}}</a></li>
                             </ul>
                             <p class="mb-1 font-black">{{ $profile->name }}</p>
                             <p> {{ $profile->bio}} </p>
@@ -52,7 +52,7 @@
                         <img src="/storage/{{ $post->image_path }}" alt="" class="w-full h-full object-cover">
                         <div class="post-info">
                             <ul>
-                                <li class="inline-block font-semibold mr-7">
+                                <li class="inline-block font-semibold me-7">
                                     <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
                                     <i class="fas fa-heart" aria-hidden="true"></i>33
                                 </li>
@@ -76,7 +76,7 @@
                         <img src="/storage/{{ $post->image_path }}" alt="" class="w-full h-full object-cover">
                         <div class="post-info">
                             <ul>
-                                <li class="inline-block font-semibold mr-7">
+                                <li class="inline-block font-semibold me-7">
                                     <span class="absolute h-1 w-1 overflow-hidden">{{__('Likes:')}}</span>
                                     <i class="fas fa-heart" aria-hidden="true"></i>33
                                 </li>
