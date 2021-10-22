@@ -19,11 +19,17 @@ class LanguageSwitcher
      */
     public function handle(Request $request, Closure $next)
     {
+        $lang = $request->session()->get('language', 'en');
         if(Auth::User()!=null)
         {
             App::setLocale(Auth::user()->language);
             if(Auth::User()->language == "ar")
             {
+                View::share('rtl', 'true');
+            }
+        }else if (isset($lang)){
+            App::setLocale($lang);
+            if($lang == 'ar'){
                 View::share('rtl', 'true');
             }
         }

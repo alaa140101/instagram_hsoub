@@ -66,3 +66,12 @@ Route::get('{username}', function($username) {
 
 Route::resource('posts', PostController::class)->middleware('language');
 
+Route::get('setlang/{language}', function($lang) {
+    if($lang == "ar" || $lang == "en") {
+        session(['language' => $lang]);
+    }else{
+        abort(404);
+    }
+    return redirect()->back();
+});
+

@@ -19,10 +19,26 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <style>
+            .rtl{
+                direction: rtl;
+            }
+            .ltr{
+                direction: ltr;
+            }
+        </style>
     </head>
-    <body>
+    <body class="{{isset($rtl) ? 'rtl' : 'ltr'}}">
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
+        </div>
+
+        <div class="text-center bg-gray-100 py-4">
+            <span>
+                <a href="setlang/en" class="mx-2 text-blue-700">English</a>
+                -
+                <a href="setlang/ar" class="mx-2 text-blue-700">العربية</a>
+            </span>
         </div>
     </body>
 </html>
