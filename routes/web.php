@@ -37,11 +37,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     })->name('explore');
 
     Route::get('/followers', function() {
-        return view('followers', ['profile' => auth()->user(), 'followers'=>auth()->user()->followers()->get()]);
+        return view('followers', ['profile' => auth()->user(), 'followers'=>auth()->user()->followers()->paginate(5)]);
     })->name('followers');
 
     Route::get('/following', function() {
-        return view('following', ['profile' => auth()->user(), 'following'=>auth()->user()->follows()->get()]);
+        return view('following', ['profile' => auth()->user(), 'following'=>auth()->user()->follows()->paginate(5)]);
     })->name('following');
 
     Route::get('/inbox', function(){
@@ -60,7 +60,7 @@ Route::get('{username}', function($username) {
     if ($user == null ) {
         abort(404);
     }
-    $posts = $user->posts;
+    $posts = $user->posts()->paginate(4);
     return view('profile', ['profile' => $user, 'posts' => $posts]);
 })->name('user_profile');
 

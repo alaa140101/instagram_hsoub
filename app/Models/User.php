@@ -113,7 +113,7 @@ class User extends Authenticatable
             return $this->followers()
             ->where('following_user_id', $this->id)
             ->where('accepted', false)
-            ->latest()->get();
+            ->latest()->paginate(3);
         }
         return null;
     }
@@ -122,7 +122,7 @@ class User extends Authenticatable
         return $this->follows()
         ->where('user_id', $this->id)
         ->where('accepted', false)
-        ->latest()->get();
+        ->latest()->paginate(3);
     }
 
     public function followingAndAccepted(User $user) {
@@ -140,7 +140,7 @@ class User extends Authenticatable
 
     public function home() {
         $ids = $this->follows()->where('accepted', true)->get()->pluck('id');
-        return Post::whereIn('user_id', $ids)->latest()->get();
+        return Post::whereIn('user_id', $ids)->latest()->paginate(7);
     }
 
     public function iFollow() {
@@ -165,6 +165,6 @@ class User extends Authenticatable
         $public = User::where('status', 'private')->pluck('id')->toArray();
         $others = array_merge($ifollow, $public);
 
-        return Post::whereNotIn('user_id', $others)->latest()->get();
+        return Post::whereNotIn('user_id', $others)->latest()->paginate(10);
     }
 }

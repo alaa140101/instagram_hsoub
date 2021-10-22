@@ -18,11 +18,12 @@
                             </div>
                             @if($follower->status == 'private')
                                 @livewire('accept-follow', ['profile_id' => $follower->id], key($follower->username))
-                            @endif 
+                            @endif
                             @livewire('follow-button', ['profile_id' => $follower->id], key($follower->id))
                         </div>
                     </div>
                 @endforeach
+                <div class="col-span-3 mt-10">{{ $followers->links() }}</div>
                 @else
                 <div class="my-10 text-center">
                     <p class="font-semibold">{{__('Nothing to show right now!')}}</p>

@@ -24,11 +24,18 @@
                     <span>{{ $post->post_caption }}</span>
                 </div>
                 @foreach ($post->comments as $comment)
+                @if($loop->iteration == 4)
+                @break
+                @endif
                 <div class="mr-7">
                     <a href="/{{$comment->user->username}}" class="font-bold hover:underline">{{$comment->user->username}}</a>
                     <span>{{$comment->comment}}</span>
                 </div>
                 @endforeach
+                @if($post->comments()->count() > 3)
+                <a href="/posts/{{$post->id}}" class="font-sm text-gray-700">
+                    {{__('View all')}} {{$post->comments()->count()}} {{__('comment')}}</a>
+                @endif
                 <div class="text-gray-500 text-xs">
                     {{$post->created_at->format('M j o')}}
                 </div>
@@ -49,6 +56,7 @@
                 <p class="font-semibold">{{__('Start your journey, follow your friends!')}}</p>
             </div>
             @endforelse
+            <div class="col-span-3 mt-10">{{ $posts->links() }}</div>
         </div>
         <div class="col-start-8 col-span-3 ml-4">
             <div class="flex flex-row items-center">
@@ -95,7 +103,7 @@
             @empty
             <div class="my-10">
                 <p class="font-semibold">{{__('Nothing to show right now!')}}</p>
-            </div>    
+            </div>
             @endforelse
         </div>
     </div>

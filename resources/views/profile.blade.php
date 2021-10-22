@@ -65,6 +65,7 @@
                     </a>
                 </div>
                 @endforeach
+                <div class="col-span-3 mt-10">{{ $posts->links() }}</div>
             </div>
         @else
             @can('view-profile', $profile)
@@ -88,6 +89,7 @@
                     </a>
                 </div>
                 @endforeach
+                <div class="col-span-3 mt-10">{{ $posts->links() }}</div>
             </div>
             @else
             <div>

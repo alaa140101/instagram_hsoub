@@ -18,11 +18,12 @@
                             </div>
                             @if($profile->status == 'private')
                              @livewire('accept-follow', ['profile_id' => $req->id], key($req->username))
-                            @endif 
+                            @endif
                             @livewire('follow-button', ['profile_id' => $req->id], key($req->id))
                         </div>
                     </div>
                 @endforeach
+                <div class="col-span-3 mt-10">{{ $requests->links() }}</div>
                 @else
                 <div class="my-10 text-center">
                     <p class="font-semibold">{{__('Nothing to show right now!')}}</p>
@@ -44,6 +45,7 @@
                           </div>
                       </div>
                   @endforeach
+                  <div class="col-span-3 mt-10">{{ $pendings->links() }}</div>
                   @else
                   <div class="my-10 text-center">
                       <p class="font-semibold">{{__('Nothing to show right now!')}}</p>

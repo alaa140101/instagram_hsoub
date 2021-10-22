@@ -18,6 +18,7 @@
                     </a>
                 </div>
             @endforeach
+            <div class="col-span-3 mt-10">{{ $posts->links() }}</div>
         </div>
     </div>
 </x-app-layout>
